@@ -1,7 +1,15 @@
 version: '2.1'
 
 services:
-  asteroids:
+  db:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test_db
+  app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,3 +20,5 @@ services:
     environment:
       - ENVIRONMENT=LOCAL
       - LOG_LEVEL=INFO
+    depends_on:
+      - db
