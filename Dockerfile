@@ -1,12 +1,16 @@
 FROM python:3.8
 
-EXPOSE 5000
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH=/usr/src/app
 
 WORKDIR /usr/src/app
 
 ADD requirements.txt /usr/src/app
-RUN python3 -m pip install -r requirements.txt
+RUN pip install --upgrade pip setuptools wheel \
+    && pip install -r requirements.txt
 
 ADD . /usr/src/app
+
+EXPOSE 5000
 
 ENTRYPOINT ["./entrypoint.sh"]
