@@ -1,6 +1,8 @@
 alembic==1.4.2
+asyncpg==0.20.1
 click==7.1.2
 fastapi==0.60.1
+gino==1.0.1
 h11==0.9.0
 httptools==0.1.1
 Mako==1.1.3
