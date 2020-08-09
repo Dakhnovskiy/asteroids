@@ -2,13 +2,13 @@ import asyncio
 import logging
 
 from src.app.config import config
-
-
-async def load_asteroids_data():
-    pass
+from src.asteroids_data.asteroids_data import load_asteroids_data
 
 
 async def worker_load_asteroids_data():
+    """
+    Asteroids data loader
+    """
     while True:
         try:
             await load_asteroids_data()
