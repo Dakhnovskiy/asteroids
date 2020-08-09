@@ -11,7 +11,9 @@ class Config:
     PG_PASSWORD = os.environ['PG_PASSWORD']
 
     REDIS_HOST = os.environ['REDIS_HOST']
-    REDIS_PORT = os.environ['REDIS_PORT']
+    REDIS_PORT = int(os.environ['REDIS_PORT'])
+
+    LOAD_ASTEROIDS_DATA_INTERVAL = int(os.environ['LOAD_ASTEROIDS_DATA_INTERVAL'])
 
     API_KEY_NASA = os.environ['API_KEY_NASA']
 
