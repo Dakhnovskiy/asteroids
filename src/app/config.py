@@ -10,6 +10,9 @@ class Config:
     PG_USER = os.environ['PG_USER']
     PG_PASSWORD = os.environ['PG_PASSWORD']
 
+    REDIS_HOST = os.environ['REDIS_HOST']
+    REDIS_PORT = os.environ['REDIS_PORT']
+
     API_KEY_NASA = os.environ['API_KEY_NASA']
 
     @property
