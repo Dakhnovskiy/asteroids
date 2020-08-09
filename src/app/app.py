@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.routing import Request
 from starlette.responses import JSONResponse
 
-from src.api.v1.handlers.asteroids import asteroids_handlers
+from src.api.v1.views.asteroids import asteroids_views
 from src.app.logging_config import LOGGING_CONFIG
 
 logging.config.dictConfig(LOGGING_CONFIG)
@@ -22,4 +22,4 @@ async def on_500(request: Request, exc: Exception):
     )
 
 
-app.include_router(asteroids_handlers, prefix='/v1')
+app.include_router(asteroids_views, prefix='/v1')

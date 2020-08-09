@@ -12,7 +12,7 @@ LOGGING_CONFIG = {
             'datefmt': '%Y-%m-%d %H:%M:%S',
         }
     },
-    'handlers': {
+    'views': {
         'console': {
             'level': config.LOG_LEVEL,
             'class': 'logging.StreamHandler',
@@ -22,7 +22,7 @@ LOGGING_CONFIG = {
     'loggers': {
         '': {
             'level': config.LOG_LEVEL,
-            'handlers': (['console']),
+            'views': (['console']),
         },
     },
 }
