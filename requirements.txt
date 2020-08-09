@@ -1,4 +1,5 @@
 alembic==1.4.2
+aredis==1.1.8
 asyncpg==0.20.1
 click==7.1.2
 fastapi==0.60.1
