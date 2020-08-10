@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 
 from aredis import StrictRedis
 
@@ -21,8 +22,17 @@ async def save_to_redis(key: str, data: dict, expire_time: int) -> None:
 
 async def exists_in_redis(key: str) -> bool:
     """
-    Check key in redis
+    check key in redis
     :param key: key
     :return: True/False
     """
     return await redis_client.exists(key)
+
+
+async def get_from_redis(key: str) -> Optional[dict]:
+    """
+    get data by key from redis
+    :param key: key
+    :return: data
+    """
+    return json.loads(await redis_client.get(key))
