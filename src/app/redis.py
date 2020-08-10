@@ -13,7 +13,7 @@ def save_to_redis(key: str, data: dict, expire_time: int) -> None:
     save data to redis
     :param key: key
     :param data: data
-    :param expire_time: ttl data
+    :param expire_time: ttl data(seconds)
     """
     await redis_client.set(key, json.dumps(data))
     await redis_client.expire(key, expire_time)
