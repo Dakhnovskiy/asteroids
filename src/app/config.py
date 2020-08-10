@@ -14,6 +14,7 @@ class Config:
     REDIS_PORT = int(os.environ['REDIS_PORT'])
 
     LOAD_ASTEROIDS_DATA_INTERVAL = int(os.environ['LOAD_ASTEROIDS_DATA_INTERVAL'])
+    LOAD_ASTEROIDS_PAGE_CONCURRENCY = int(os.environ['LOAD_ASTEROIDS_PAGE_CONCURRENCY'])
 
     API_KEY_NASA = os.environ['API_KEY_NASA']
 
