@@ -8,7 +8,7 @@ from src.app.config import config
 redis_client = StrictRedis(host=config.REDIS_HOST, port=config.REDIS_PORT)
 
 
-def save_to_redis(key: str, data: dict, expire_time: int) -> None:
+async def save_to_redis(key: str, data: dict, expire_time: int) -> None:
     """
     save data to redis
     :param key: key
@@ -19,7 +19,7 @@ def save_to_redis(key: str, data: dict, expire_time: int) -> None:
     await redis_client.expire(key, expire_time)
 
 
-def exists_in_redis(key: str) -> bool:
+async def exists_in_redis(key: str) -> bool:
     """
     Check key in redis
     :param key: key
