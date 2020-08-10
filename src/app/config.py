@@ -17,6 +17,7 @@ class Config:
     LOAD_ASTEROIDS_PAGE_CONCURRENCY = int(os.environ['LOAD_ASTEROIDS_PAGE_CONCURRENCY'])
 
     API_KEY_NASA = os.environ['API_KEY_NASA']
+    URL_NASA_ASTEROIDS = os.environ['URL_NASA_ASTEROIDS']
 
     @property
     def PG_DSN(self):

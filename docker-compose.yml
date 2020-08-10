@@ -42,6 +42,7 @@ services:
       - LOAD_ASTEROIDS_DATA_INTERVAL=60
       - LOAD_ASTEROIDS_PAGE_CONCURRENCY=10
       - API_KEY_NASA=BxfuK34p9pwr6YxtLwpTLSbVxlWYtpmcY63XhPH8
+      - URL_NASA_ASTEROIDS=https://api.nasa.gov/neo/rest/v1/neo/browse
     depends_on:
       postgres:
         condition: service_healthy
