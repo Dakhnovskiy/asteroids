@@ -1,8 +1,13 @@
 import asyncio
 import logging
+import logging.config
 
 from src.app.config import config
+from src.app.logging_config import LOGGING_CONFIG
 from src.asteroids_data.asteroids_data import load_asteroids_data
+
+
+logging.config.dictConfig(LOGGING_CONFIG)
 
 
 async def worker_load_asteroids_data():
@@ -11,14 +16,14 @@ async def worker_load_asteroids_data():
     """
     while True:
         try:
+            logging.info('start loading asteroids data')
             await load_asteroids_data()
         except Exception as exc:
             logging.exception(exc)
 
+        logging.info('finish loading asteroids data')
         await asyncio.sleep(config.LOAD_ASTEROIDS_DATA_INTERVAL)
 
 
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.create_task(worker_load_asteroids_data())
-    loop.run_forever()
+    asyncio.run(worker_load_asteroids_data())
