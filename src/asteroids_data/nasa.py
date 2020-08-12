@@ -1,4 +1,5 @@
 import httpx
+from starlette import status
 
 from src.app.config import config
 
@@ -15,7 +16,7 @@ async def get_asteroids_data_from_nasa_by_page(number_of_page: int) -> dict:
                 url=config.URL_NASA_ASTEROIDS,
                 params={'page': number_of_page, 'api_key': api_key}
             )
-            if resp.status_code != 429:
+            if resp.status_code != status.HTTP_429_TOO_MANY_REQUESTS:
                 break
     resp.raise_for_status()
     return resp.json()
