@@ -35,4 +35,5 @@ async def get_from_redis(key: str) -> Optional[dict]:
     :param key: key
     :return: data
     """
-    return json.loads(await redis_client.get(key))
+    data = await redis_client.get(key)
+    return json.loads(data) if data else None
