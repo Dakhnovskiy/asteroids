@@ -12,7 +12,7 @@ async def load_asteroids_data() -> None:
     """
     load data about asteroids
     """
-    count_asteroids_pages = await get_count_asteroids_pages()
+    count_asteroids_pages = config.LOAD_ASTEROID_MAX_PAGES_FOR_LOADING or await get_count_asteroids_pages()
     logging.info(f'Count of asteroids pages = {count_asteroids_pages}')
     sem = asyncio.Semaphore(config.LOAD_ASTEROIDS_PAGE_CONCURRENCY)
     await asyncio.gather(*[load_asteroids_data_by_page(sem, page + 1) for page in range(count_asteroids_pages)])
@@ -74,6 +74,7 @@ async def load_asteroids_data_by_page(semaphore: asyncio.Semaphore, number_of_pa
     :param number_of_page: number of page
     """
     async with semaphore:
+        logging.info(f'start page {number_of_page} loading')
         asteroids_data = await get_asteroids_data_by_page(number_of_page)
         await save_asteroids_data_to_storage(asteroids_data)
         logging.info(f'page {number_of_page} is loaded')

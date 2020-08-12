@@ -40,8 +40,9 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - LOAD_ASTEROIDS_DATA_INTERVAL=60
-      - LOAD_ASTEROIDS_PAGE_CONCURRENCY=10
-      - API_KEY_NASA=BxfuK34p9pwr6YxtLwpTLSbVxlWYtpmcY63XhPH8
+      - LOAD_ASTEROIDS_PAGE_CONCURRENCY=50
+      - LOAD_ASTEROID_MAX_PAGES_FOR_LOADING=2
+      - API_KEYS_NASA=BxfuK34p9pwr6YxtLwpTLSbVxlWYtpmcY63XhPH8,TiH25Axrnk13ETPaIb2N23fsmr6P5GwWUKRLPmYy,W0yuQzYtDJRSYqkXV4Wvjz6x8gkwOosx1dGaL09X,hjVfcvd9gVwik6oHm2PIOY60Qz3A1sMomRCqflxG
       - URL_NASA_ASTEROIDS=https://api.nasa.gov/neo/rest/v1/neo/browse
     depends_on:
       postgres:
