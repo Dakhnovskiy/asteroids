@@ -70,7 +70,7 @@ async def exists_asteroid_data_by_name(asteroid_name: str) -> bool:
 async def exists_asteroids_data_by_names(asteroids_names: List[str]) -> bool:
     """
     check asteroids name list in storage
-    :param asteroids_names: asteroids name
+    :param asteroids_names: asteroids name list
     :return: result of checking (True/False)
     """
     exists_list = await asyncio.gather(*[exists_asteroid_data_by_name(name) for name in asteroids_names])
