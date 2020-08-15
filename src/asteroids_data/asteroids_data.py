@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import Optional
+from typing import Optional, List
 
 from src.app import redis
 from src.app.config import config
@@ -65,6 +65,16 @@ async def exists_asteroid_data_by_name(asteroid_name: str) -> bool:
     :return: result of checking (True/False)
     """
     return await redis.exists_in_redis(get_hash(asteroid_name))
+
+
+async def exists_asteroids_data_by_names(asteroids_names: List[str]) -> bool:
+    """
+    check asteroids name list in storage
+    :param asteroids_names: asteroids name
+    :return: result of checking (True/False)
+    """
+    exists_list = await asyncio.gather(*[exists_asteroid_data_by_name(name) for name in asteroids_names])
+    return all(exists_list)
 
 
 async def load_asteroids_data_by_page(semaphore: asyncio.Semaphore, number_of_page: int) -> None:
