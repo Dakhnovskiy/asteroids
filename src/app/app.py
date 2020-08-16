@@ -7,11 +7,22 @@ from starlette.responses import JSONResponse
 
 from src.api.v1.views.asteroids import asteroids_views
 from src.api.v1.views.images import images_views
+from src.app.db import db
 from src.app.logging_config import LOGGING_CONFIG
 
 logging.config.dictConfig(LOGGING_CONFIG)
 
 app = FastAPI()
+
+
+@app.on_event("startup")
+async def startup():
+    await db.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    await db.disconnect()
 
 
 @app.exception_handler(500)
