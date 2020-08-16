@@ -1,6 +1,8 @@
 from typing import List
 
 import sqlalchemy as sa
+from asyncpg import UniqueViolationError
+from sqlalchemy import UniqueConstraint
 
 from src.app.db import metadata, db
 
@@ -19,6 +21,7 @@ favourites_users_asteroids = sa.Table(
     metadata,
     sa.Column('user_id', sa.BigInteger, sa.ForeignKey('users.id'), nullable=False),
     sa.Column('asteroid_name', sa.String(256), nullable=False),
+    UniqueConstraint('user_id', 'asteroid_name', name='uq_favourites_users_asteroids'),
 )
 
 
@@ -54,4 +57,7 @@ class UserFavourites:
     @classmethod
     async def create(cls, user_id: int, asteroid_name: str) -> None:
         query = favourites_users_asteroids.insert().values(user_id=user_id, asteroid_name=asteroid_name)
-        await db.execute(query)
+        try:
+            await db.execute(query)
+        except UniqueViolationError:
+            pass
