@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel, Field
 
 
@@ -11,3 +13,14 @@ class UserCreate(UserBase):
 
 class UserInfo(UserBase):
     id: int
+
+
+class UserFavourites(BaseModel):
+    asteroid_name: str
+
+
+class UserFavouritesInfo(BaseModel):
+    user_id: int
+    favourites: List[str]
+
+
