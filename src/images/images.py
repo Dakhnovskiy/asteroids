@@ -1,7 +1,7 @@
 import datetime
 
 from src.images.image_files import generate_path, save_file_on_disc
-from src.models.images import Image
+from src.models.images import Image, AsteroidImage
 
 
 async def save_image(
@@ -20,8 +20,6 @@ async def save_image(
     """
     image_path = await save_image_binary_data(image_binary, image_name)
     image = await save_image_data(image_path, image_datetime, asteroids_names)
-    print(datetime)
-
     return image
 
 
@@ -56,7 +54,18 @@ async def save_image_data(image_path: str, image_datetime: datetime.datetime, as
     :return: image data
     """
     image_id = await Image.create(image_path, image_datetime)
+    await AsteroidImage.create_list(image_id, asteroids_names)
     return {
         'id': image_id,
         'image_datetime': image_datetime,
     }
+
+
+async def get_image_data_by_id(image_id: int) -> dict:
+    """
+    get image data by image id
+    :param image_id: image id
+    :return: image data
+    """
+    image = await Image.get(image_id)
+    return image
