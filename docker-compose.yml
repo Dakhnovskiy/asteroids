@@ -44,6 +44,7 @@ services:
       - LOAD_ASTEROID_MAX_PAGES_FOR_LOADING=2
       - API_KEYS_NASA=BxfuK34p9pwr6YxtLwpTLSbVxlWYtpmcY63XhPH8,TiH25Axrnk13ETPaIb2N23fsmr6P5GwWUKRLPmYy,W0yuQzYtDJRSYqkXV4Wvjz6x8gkwOosx1dGaL09X,hjVfcvd9gVwik6oHm2PIOY60Qz3A1sMomRCqflxG
       - URL_NASA_ASTEROIDS=https://api.nasa.gov/neo/rest/v1/neo/browse
+      - UPLOAD_FOLDER_NAME=uploaded_images
     depends_on:
       postgres:
         condition: service_healthy

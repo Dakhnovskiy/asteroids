@@ -1,7 +1,7 @@
 #!/bin/bash
 
 python scripts/make_migrations.py
-
+python scripts/make_upload_folder.py
 
 nohup python src/app/worker.py &
 

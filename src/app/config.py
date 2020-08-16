@@ -1,6 +1,9 @@
 import os
 
 
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
 class Config:
     LOG_LEVEL = os.environ['LOG_LEVEL']
 
@@ -19,6 +22,12 @@ class Config:
 
     API_KEYS_NASA = os.environ['API_KEYS_NASA'].split(',')
     URL_NASA_ASTEROIDS = os.environ['URL_NASA_ASTEROIDS']
+
+    UPLOAD_FOLDER_NAME = os.environ['UPLOAD_FOLDER_NAME']
+
+    @property
+    def UPLOAD_FOLDER(self):
+        return os.path.join(BASE_PATH, self.UPLOAD_FOLDER_NAME)
 
     @property
     def PG_DSN(self):
