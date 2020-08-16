@@ -17,7 +17,7 @@ images = sa.Table(
 asteroids_images = sa.Table(
     'asteroids_images',
     metadata,
-    sa.Column('asteroid_name', sa.String(256), nullable=False),
+    sa.Column('asteroid_name', sa.String(256), nullable=False, index=True),
     sa.Column('image_id', sa.BigInteger, sa.ForeignKey('images.id'), nullable=False),
 )
 
