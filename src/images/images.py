@@ -1,4 +1,5 @@
 import datetime
+from typing import List
 
 from src.images.image_files import generate_path, save_file_on_disc
 from src.models.images import Image, AsteroidImage
@@ -69,3 +70,22 @@ async def get_image_data_by_id(image_id: int) -> dict:
     """
     image = await Image.get(image_id)
     return image
+
+
+async def get_images_ids_by_asteroid_name(asteroid_name: str) -> List[int]:
+    """
+    get images ids by asteroid name
+    :param asteroid_name: asteroids name
+    :return: list of images ids
+    """
+    return await AsteroidImage.get_images_list_by_asteroid_name(asteroid_name)
+
+
+def get_image_download_url(base_url: str, image_id: int) -> str:
+    """
+    get url for download image
+    :param base_url: base url
+    :param image_id: image id
+    :return: url for download image
+    """
+    return f'{base_url}v1/images/{image_id}/file'

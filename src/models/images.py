@@ -39,9 +39,11 @@ class Image:
 class AsteroidImage:
     @classmethod
     async def get_images_list_by_asteroid_name(cls, asteroid_name):
-        query = asteroids_images.select().where(asteroids_images.c.asteroid_name == asteroid_name)
-        images_ids = await db.fetch_val(query, column=asteroids_images.c.image_id)
-        return images_ids
+        query = asteroids_images.select().\
+            where(asteroids_images.c.asteroid_name == asteroid_name).\
+            with_only_columns(columns=[asteroids_images.c.image_id])
+        asteroids_images_list = await db.fetch_all(query)
+        return [asteroid_image[0] for asteroid_image in asteroids_images_list]
 
     @classmethod
     async def create_list(cls, image_id: int, asteroid_names: List[str]):

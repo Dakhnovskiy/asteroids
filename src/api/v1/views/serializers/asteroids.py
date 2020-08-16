@@ -24,4 +24,4 @@ class Asteroids(BaseModel):
 
     orbital_data: OrbitalData
 
-    images_list: List[str] = []
+    images_links: List[str] = []
