@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 
-from src.app.db import metadata
+from src.app.db import metadata, db
 
 
 users = sa.Table(
@@ -18,3 +18,17 @@ favourites_users_asteroids = sa.Table(
     sa.Column('user_id', sa.BigInteger, sa.ForeignKey('users.id'), nullable=False),
     sa.Column('asteroid_name', sa.String(256), nullable=False),
 )
+
+
+class User:
+    @classmethod
+    async def get_by_login(cls, login: str) -> dict:
+        query = users.select().where(users.c.login == login)
+        user = await db.fetch_one(query)
+        return user
+
+    @classmethod
+    async def create(cls, login: str, password_hash: str) -> int:
+        query = users.insert().values(login=login, password_hash=password_hash)
+        user_id = await db.execute(query)
+        return user_id

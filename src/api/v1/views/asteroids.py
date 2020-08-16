@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, Query, HTTPException, status
 from starlette.requests import Request
 
 from src.api.v1.views.serializers import Asteroids
@@ -12,7 +12,7 @@ asteroids_views = APIRouter()
 async def get_asteroid(request: Request, name: str = Query(..., min_length=1)):
     asteroid_data = await get_asteroid_data_from_storage_by_name(name)
     if not asteroid_data:
-        raise HTTPException(status_code=404, detail=f'asteroid name {name} not found')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'asteroid name {name} not found')
     images_ids = await get_images_ids_by_asteroid_name(name)
     asteroid_data['images_links'] = [get_image_download_url(str(request.base_url), image_id) for image_id in images_ids]
     return asteroid_data

@@ -7,6 +7,7 @@ from starlette.responses import JSONResponse
 
 from src.api.v1.views.asteroids import asteroids_views
 from src.api.v1.views.images import images_views
+from src.api.v1.views.users import users_views
 from src.app.db import db
 from src.app.logging_config import LOGGING_CONFIG
 
@@ -36,3 +37,4 @@ async def on_500(request: Request, exc: Exception):
 
 app.include_router(asteroids_views, prefix='/v1')
 app.include_router(images_views, prefix='/v1')
+app.include_router(users_views, prefix='/v1')

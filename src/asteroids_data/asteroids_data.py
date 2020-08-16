@@ -4,7 +4,7 @@ from typing import Optional, List
 
 from src.app import redis
 from src.app.config import config
-from src.asteroids_data.hash import get_hash
+from src.hash.hash import get_hash
 from src.asteroids_data.nasa import get_asteroids_data_from_nasa_by_page
 
 
