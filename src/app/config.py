@@ -25,6 +25,10 @@ class Config:
 
     UPLOAD_FOLDER_NAME = os.environ['UPLOAD_FOLDER_NAME']
 
+    SECRET_KEY = os.environ['SECRET_KEY']
+    ALGORITHM = os.environ['ALGORITHM']
+    ACCESS_TOKEN_EXPIRE_MINUTES = int(os.environ['ACCESS_TOKEN_EXPIRE_MINUTES'])
+
     @property
     def UPLOAD_FOLDER(self):
         return os.path.join(BASE_PATH, self.UPLOAD_FOLDER_NAME)

@@ -45,6 +45,9 @@ services:
       - API_KEYS_NASA=BxfuK34p9pwr6YxtLwpTLSbVxlWYtpmcY63XhPH8,TiH25Axrnk13ETPaIb2N23fsmr6P5GwWUKRLPmYy,W0yuQzYtDJRSYqkXV4Wvjz6x8gkwOosx1dGaL09X,hjVfcvd9gVwik6oHm2PIOY60Qz3A1sMomRCqflxG
       - URL_NASA_ASTEROIDS=https://api.nasa.gov/neo/rest/v1/neo/browse
       - UPLOAD_FOLDER_NAME=uploaded_images
+      - SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
     depends_on:
       postgres:
         condition: service_healthy
