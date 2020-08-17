@@ -1,6 +1,7 @@
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, status, HTTPException, Depends
 
 from src.api.v1.views.serializers import UserInfo, UserCreate, UserFavourites, UserFavouritesInfo
+from src.api.v1.views.token import get_current_user
 from src.asteroids_data.asteroids_data import exists_asteroid_data_by_name
 from src.users_data.users_data import get_user_by_login, create_user_data, get_user_by_id, create_user_favourites, \
     get_user_favourites
@@ -24,17 +25,12 @@ async def create_user(
     }
 
 
-@users_views.post('/users/{user_id}/favourites', status_code=204)
+@users_views.post('/favourites', status_code=204)
 async def create_favourites(
-        user_id: int,
-        user_favourites: UserFavourites
+        user_favourites: UserFavourites,
+        current_user: UserInfo = Depends(get_current_user)
 ):
-    user_data = await get_user_by_id(user_id)
-    if not user_data:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f'user id {user_id} not found'
-        )
+    user_data = await get_user_by_login(current_user.login)
 
     asteroid_exists = await exists_asteroid_data_by_name(user_favourites.asteroid_name)
     if not asteroid_exists:
@@ -43,7 +39,7 @@ async def create_favourites(
             detail=f'asteroid name {user_favourites.asteroid_name} not found'
         )
 
-    await create_user_favourites(user_id, user_favourites.asteroid_name)
+    await create_user_favourites(user_data['id'], user_favourites.asteroid_name)
 
 
 @users_views.get('/users/{user_id}/favourites', response_model=UserFavouritesInfo, status_code=200)
