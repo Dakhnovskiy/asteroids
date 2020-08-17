@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException, status, APIRouter
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 
-from src.api.v1.views.serializers import Token
+from src.api.v1.views.serializers import Token, UserInfo
 from src.app.config import config
 from src.auth.auth import authenticate_user, create_access_token
 from src.users_data.users_data import get_user_by_login
@@ -31,7 +31,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     user = await get_user_by_login(login)
     if user is None:
         raise credentials_exception
-    return user
+    return UserInfo(**user)
 
 
 @token_views.post('/token', response_model=Token)
