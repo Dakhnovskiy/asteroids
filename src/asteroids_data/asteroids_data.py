@@ -85,6 +85,11 @@ async def load_asteroids_data_by_page(semaphore: asyncio.Semaphore, number_of_pa
     """
     async with semaphore:
         logging.info(f'start page {number_of_page} loading')
-        asteroids_data = await get_asteroids_data_by_page(number_of_page)
-        await save_asteroids_data_to_storage(asteroids_data)
-        logging.info(f'page {number_of_page} is loaded')
+        try:
+            asteroids_data = await get_asteroids_data_by_page(number_of_page)
+            await save_asteroids_data_to_storage(asteroids_data)
+        except Exception as exc:
+            logging.exception(exc)
+            logging.info(f"page {number_of_page} isn't loaded")
+        else:
+            logging.info(f'page {number_of_page} is loaded')
